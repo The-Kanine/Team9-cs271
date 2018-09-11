@@ -1,5 +1,3 @@
-package codepack;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +25,7 @@ public class Team9GUI implements ActionListener {
 /**
  * The constructor for the Team9GUI
  */
-	private Team9GUI() {
+	public Team9GUI() {
 		JPanel signUpPanel= signUpPanel();
 		signUpFrame = setupFrame("SIGN UP", signUpPanel,true,signUpButton);		
 	}
@@ -218,7 +216,7 @@ public class Team9GUI implements ActionListener {
 			else {
 				list.addUser(userSignUp.getText(), (new String(passwordSignUp.getPassword())), emailSignUp.getText());
 				JOptionPane.showMessageDialog(signUpFrame, "Your account has been created!");
-				signUpFrame.dispose();
+//				signUpFrame.dispose();
 				JPanel loginPanel=loginPanel();
 				loginFrame = setupFrame("LOG IN", loginPanel,true,loginButton);
 			}

@@ -1,5 +1,3 @@
-package codepack;
-
 import java.util.ArrayList;
 
 /**
@@ -43,6 +41,12 @@ private ArrayList<User> userList;
        return false;
     }
     
+    /**
+     * @param userName
+     * @param password
+     * @return a User object
+     * Searches the list and find the user that has the matching username and password
+     */
     public User findUser(String userName, String password){
     	for (User user: userList) {
     		if(user.isValidLogin(userName, password)) {   
