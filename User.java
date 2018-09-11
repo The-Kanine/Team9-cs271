@@ -1,5 +1,3 @@
-package codepack;
-
 /**
  * @authors Van, Tuan
  * Represents a user (an account). Each account
@@ -142,7 +140,7 @@ public class User {
 	 * @return a boolean
 	 * Checks if a password matches with the user's password
 	 */
-	private boolean matchPassword(String password) {
+	public boolean matchPassword(String password) {
 		return checkPasswd(passwd) && password.equals(this.passwd);
 	}
 	
