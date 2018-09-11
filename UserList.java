@@ -1,3 +1,5 @@
+package codepack;
+
 import java.util.ArrayList;
 
 /**
@@ -33,10 +35,21 @@ private ArrayList<User> userList;
      * Checks if a username already exists
      */
     public boolean doesUserNameExist(String userName){
-    	for (User user: userList)
-    		if(user.matchUserName(userName))   
+    	for (User user: userList) {
+    		if(user.matchUserName(userName)) {   
     			return true;   
+    		}	
+    	}
        return false;
+    }
+    
+    public User findUser(String userName, String password){
+    	for (User user: userList) {
+    		if(user.isValidLogin(userName, password)) {   
+    			return user;   
+    		}	
+    	}
+       return null;
     }
     
     /**

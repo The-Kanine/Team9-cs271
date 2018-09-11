@@ -1,3 +1,5 @@
+package codepack;
+
 /**
  * @authors Van, Tuan
  * Represents a user (an account). Each account
