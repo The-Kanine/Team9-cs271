@@ -3,82 +3,51 @@ package codepack;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
-import javax.swing.border.Border;
-
-import test.User;
-import test.UserList;
-
+/**
+ * The Team9GUI class creates and manages the the visual components of the
+ * user account system created for CS-HU 271.
+ * @author Kalli Plumer, Keaton Gillihan
+ */
 public class Team9GUI implements ActionListener {
 	public JFrame signUpFrame, loginFrame, accountFrame;
 	public JButton loginButton, loginLink, signUpButton, signUpLink, editButton;
 	JTextField userSignUp, emailSignUp, userLogIn;
 	JPasswordField passwordSignUp, passwordLogIn;
 	JLabel message;
-	User user = new User(null, null, null);
+	User user= new User(null, null, null);
 	UserList list = new UserList();
-	// JPanel messagePanel;
-
+/**
+ * The main method that starts the Team9GUI program
+ * @param args
+ */
 	public static void main(String[] args) {
 		Team9GUI GUI = new Team9GUI();
 	}
-
+/**
+ * The constructor for the Team9GUI
+ */
 	private Team9GUI() {
-		signUpFrame = new JFrame("SIGN UP");
-		signUpFrame.setMinimumSize(new Dimension(500, 500));
-		signUpFrame.setResizable(false);
-		signUpFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		signUpPanel();
-		signUpFrame.pack();
-		signUpFrame.setLocationRelativeTo(null);
-		signUpFrame.setVisible(true);
-		signUpFrame.getRootPane().setDefaultButton(signUpButton);
-		
-		loginFrame = new JFrame("LOG IN");
-		loginFrame.setMinimumSize(new Dimension(500, 500));
-		loginFrame.setResizable(false);
-		loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		loginFrame.setLocationRelativeTo(null);
-		loginPanel();
-		loginFrame.pack();
-		loginFrame.setVisible(false);
-		loginFrame.getRootPane().setDefaultButton(loginButton);
-		
-		accountFrame = new JFrame("ACCOUNT INFORMATION");
-		accountFrame.setMinimumSize(new Dimension(500, 500));
-		accountFrame.setResizable(false);
-		accountFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		accountFrame.setLocationRelativeTo(null);
-		accountPanel();
-		accountFrame.pack();
-		accountFrame.setVisible(false);
-		accountFrame.getRootPane().setDefaultButton(editButton);
+		JPanel signUpPanel= signUpPanel();
+		signUpFrame = setupFrame("SIGN UP", signUpPanel,true,signUpButton);		
 	}
-
-	private void loginPanel() {
-		JPanel login = new JPanel();
-		login.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
-		login.setLayout(new GridLayout(0, 1));
-		JLabel loginTitle = new JLabel("LOG IN", SwingConstants.CENTER);
-		loginTitle.setFont(loginTitle.getFont().deriveFont(24.0f));
+	/**
+	 * this method creates a login panel that contains everything that
+	 * an existing user would need to login(a username field, a password field,
+	 * and a login button).
+	 * @return
+	 */
+	private JPanel loginPanel() {
+		//Create Components for loginPanel
+		JPanel login = setupPanel("LOG IN");
 		JLabel userL = new JLabel("Username");
 		userLogIn = new JTextField(15);
 		JLabel passL = new JLabel("Password");
 		passwordLogIn = new JPasswordField(15);
-		loginButton = new JButton("Log In");
-		loginButton.setFont(loginButton.getFont().deriveFont(18.0f));
-		loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		loginButton.addActionListener(this);
+		loginButton = createButton("Log In");
 		JLabel signUpOption = new JLabel("Don't have an account? ", SwingConstants.CENTER);
-		signUpLink = new JButton("Sign Up Here");
-		signUpLink.setForeground(Color.BLUE);
-		signUpLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		signUpLink.setBorderPainted(false);
-		signUpLink.setFocusPainted(false);
-		signUpLink.setContentAreaFilled(false);
-		signUpLink.addActionListener(this);
-		login.add(loginTitle);
+		signUpLink = createLink("Sign Up Here");
+		//add Components to loginPanel
 		login.add(userL);
 		login.add(userLogIn);
 		login.add(passL);
@@ -88,34 +57,27 @@ public class Team9GUI implements ActionListener {
 		login.add(Box.createRigidArea(new Dimension(2, 0)));
 		login.add(signUpOption);
 		login.add(signUpLink);
-		loginFrame.getContentPane().add(BorderLayout.NORTH, login);
+		return login;
 	}
-
-	private void signUpPanel() {
-		JPanel signUp = new JPanel();
-		signUp.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
-		signUp.setLayout(new GridLayout(0, 1));
-		JLabel signUpTitle = new JLabel("SIGN UP", SwingConstants.CENTER);
-		signUpTitle.setFont(signUpTitle.getFont().deriveFont(24.0f));
+	/**
+	 * this method creates a sign panel that contains everything that
+	 * an new user would need to sign up(a username field, a password field,
+	 * an email field, and a login button).
+	 * @return
+	 */
+	private JPanel signUpPanel() {
+		//Create components for signUpPanel 
+		JPanel signUp = setupPanel("SIGN UP");
 		JLabel userSL = new JLabel("Username");
 		userSignUp = new JTextField(15);
 		JLabel emailSL = new JLabel("Email");
 		emailSignUp = new JTextField(15);
 		JLabel passwordSL = new JLabel("Password");
 		passwordSignUp = new JPasswordField(15);
-		signUpButton = new JButton("Sign Up");
-		signUpButton.setFont(signUpButton.getFont().deriveFont(18.0f));
-		signUpButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		signUpButton.addActionListener(this);
+		signUpButton = createButton("Sign Up");
 		JLabel loginOption = new JLabel("Already have an account? ", SwingConstants.CENTER);
-		loginLink = new JButton("Log In Here");
-		loginLink.setForeground(Color.BLUE);
-		loginLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		loginLink.setBorderPainted(false);
-		loginLink.setFocusPainted(false);
-		loginLink.setContentAreaFilled(false);
-		loginLink.addActionListener(this);
-		signUp.add(signUpTitle);
+		loginLink =createLink("Log In Here");
+		//add components to signUpPanel
 		signUp.add(userSL);
 		signUp.add(userSignUp);
 		signUp.add(emailSL);
@@ -127,82 +89,151 @@ public class Team9GUI implements ActionListener {
 		signUp.add(Box.createRigidArea(new Dimension(2, 0)));
 		signUp.add(loginOption);
 		signUp.add(loginLink);
-		signUpFrame.getContentPane().add(BorderLayout.CENTER, signUp);
+		return signUp;
 	}
-
-	private void accountPanel() {
-		JPanel account = new JPanel();
-		account.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
-		account.setLayout(new GridLayout(0, 1));
-		JLabel accountTitle = new JLabel("ACCOUNT INFORMATION", SwingConstants.CENTER);
-		accountTitle.setFont(accountTitle.getFont().deriveFont(24.0f));
+	/**
+	 * This method creates a panel that displays a logged in users information
+	 * @return
+	 */
+	private JPanel accountPanel() {
+		//create components for accountPanel
+		JPanel account = setupPanel("ACCOUNT INFORMATION");
 		JLabel username = new JLabel("Username: " + user.getUsername());
 		JLabel email = new JLabel("Email: " + user.getEmail());
-		editButton = new JButton("Edit Account");
-		editButton.setFont(signUpButton.getFont().deriveFont(18.0f));
-		editButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		editButton.addActionListener(this);
-		account.add(accountTitle);
+		editButton = createButton("Edit Account");
+		//add components to accountPanel
 		account.add(username);
 		account.add(email);
 		account.add(Box.createRigidArea(new Dimension(2, 0)));
 		account.add(editButton);
 		account.add(Box.createRigidArea(new Dimension(2, 0)));
-		accountFrame.getContentPane().add(BorderLayout.CENTER, account);
+		return account;
 	}	
-	
-	// private void messagePanel() {
-	// messagePanel = new JPanel();
-	// message= new JLabel("");
-	// messagePanel.add(message);
-	// frame.getContentPane().add(BorderLayout.SOUTH,messagePanel);
-	// }
-
+	/**
+	 * This method is used to create a button that looks like a link
+	 * @param text
+	 * @return
+	 */
+	private JButton createLink(String text) {
+		JButton link = new JButton(text);
+		link.setForeground(Color.BLUE);
+		link.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		link.setBorderPainted(false);
+		link.setFocusPainted(false);
+		link.setContentAreaFilled(false);
+		link.addActionListener(this);
+		return link;
+	}
+	/**
+	 * This method is used to create a button that looks like a button
+	 * @param text
+	 * @return
+	 */
+	private JButton createButton(String text) {
+		JButton button = new JButton(text);
+		button.setFont(button.getFont().deriveFont(18.0f));
+		button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		button.addActionListener(this);
+		return button;
+	}
+	/**
+	 * This method is used to create a frame with the appropriate specifications for this program 
+	 * @param text, panel, visible, button
+	 * @return
+	 */
+	private JFrame setupFrame(String text, JPanel panel,boolean visible, JButton button) {
+		JFrame frame = new JFrame(text);
+		frame.setMinimumSize(new Dimension(500, 500));
+		frame.setResizable(false);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
+		frame.getContentPane().add(panel);
+		frame.setVisible(visible);
+		frame.pack();
+		frame.getRootPane().setDefaultButton(button);
+		return frame;
+	}
+	/**
+	 * This method is used to setup the panel so that it is ready for content to be added
+	 * @param text
+	 * @return
+	 */
+	private JPanel setupPanel(String text) {
+		JPanel panel = new JPanel();
+		panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
+		panel.setLayout(new GridLayout(0, 1));
+		JLabel title = new JLabel(text, SwingConstants.CENTER);
+		title.setFont(title.getFont().deriveFont(24.0f));
+		panel.add(title);
+		return panel;
+		
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		// the login button on the login page is clicked
 		if (e.getSource().equals(loginButton)) {
 			User check = list.findUser(userLogIn.getText(), new String(passwordLogIn.getPassword()));
+			//any required fields are left empty
 			if (userLogIn.getText().equals("") || passwordLogIn.getPassword().length == 0) {
 				JOptionPane.showMessageDialog(loginFrame, "Please fill in all fields.");
-			} else if (check == null) {
+			}
+			//the login information is invalid
+			else if (check == null) {
 				JOptionPane.showMessageDialog(loginFrame, "The username and password do not match.");
-			} else {
+			}
+			//the login information is valid
+			else {
 				user = check;
 				JOptionPane.showMessageDialog(loginFrame, "You have logged in!");
 				loginFrame.setVisible(false);
-				accountFrame.setVisible(true);
+				JPanel accountPanel= accountPanel();
+				accountFrame = setupFrame("ACCOUNT INFORMATION", accountPanel,true,editButton);
 			}
 		}
-
+		// the sign up button on the sign up page is clicked
 		if (e.getSource().equals(signUpButton)) {
+			//any required fields are left empty
 			if (userSignUp.getText().equals("") || emailSignUp.getText().equals("")
 					|| passwordSignUp.getPassword().length == 0) {
 				JOptionPane.showMessageDialog(signUpFrame, "Please fill in all fields.");
-			} else if (!user.checkEmail(emailSignUp.getText())) {
+			}
+			//invalid email address
+			else if (!user.checkEmail(emailSignUp.getText())) {
 				JOptionPane.showMessageDialog(signUpFrame, "The email address provided was not valid.");
-			} else if (list.doesEmailExist(emailSignUp.getText())) {
+			}
+			//used email address
+			else if (list.doesEmailExist(emailSignUp.getText())) {
 				JOptionPane.showMessageDialog(signUpFrame, "This email address already exists in our system.");
-			} else if (list.doesUserNameExist(userSignUp.getText())) {
+			}
+			//used username
+			else if (list.doesUserNameExist(userSignUp.getText())) {
 				JOptionPane.showMessageDialog(signUpFrame, "This username already exists in our system.");
-			} else if (!user.checkPasswd(new String(passwordSignUp.getPassword()))) {
+			}
+			//invalid password
+			else if (!user.checkPasswd(new String(passwordSignUp.getPassword()))) {
 				JOptionPane.showMessageDialog(signUpFrame,
 						"Your password must have at least 8 characters containing at least an uppercase letter, a lowercase letter, and a number.");
-			} else {
+			}
+			//Sign up information is valid
+			else {
 				list.addUser(userSignUp.getText(), (new String(passwordSignUp.getPassword())), emailSignUp.getText());
 				JOptionPane.showMessageDialog(signUpFrame, "Your account has been created!");
-				signUpFrame.getContentPane().removeAll();
-				signUpFrame.repaint();
-				signUpFrame.setVisible(false);
-				loginFrame.setVisible(true);
+				signUpFrame.dispose();
+				JPanel loginPanel=loginPanel();
+				loginFrame = setupFrame("LOG IN", loginPanel,true,loginButton);
 			}
 		}
+		// the Log In Here link on the sign up page is clicked
 		if (e.getSource().equals(loginLink)) {
-			signUpFrame.setVisible(false);
-			loginFrame.setVisible(true);
-		}		
+			signUpFrame.dispose();
+			JPanel loginPanel=loginPanel();
+			loginFrame = setupFrame("LOG IN", loginPanel,true,loginButton);
+		}
+		// the Sign Up Here link on the log in page is clicked 
 		if (e.getSource().equals(signUpLink)) {
-			loginFrame.setVisible(false);
-			signUpFrame.setVisible(true);
+			loginFrame.dispose();
+			JPanel signUpPanel=signUpPanel();
+			signUpFrame = setupFrame("SIGN UP", signUpPanel,true,loginButton);
 		}
 	}
 }
