@@ -5,130 +5,201 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 
-public class Team9GUI implements ActionListener{	
-	public  JFrame frame;
-	public JButton loginB;
-	public JButton signUpButton;
-	JTextField userSF;
-	JTextField emailSF;
-	JPasswordField passwordSF;
-	JPanel messagePanel;
+import test.User;
+import test.UserList;
+
+public class Team9GUI implements ActionListener {
+	public JFrame signUpFrame, loginFrame, accountFrame;
+	public JButton loginButton, loginLink, signUpButton, signUpLink, editButton;
+	JTextField userSignUp, emailSignUp, userLogIn;
+	JPasswordField passwordSignUp, passwordLogIn;
 	JLabel message;
-	JTextField userF;
-	JPasswordField passF;
-	User u = new User(null, null, null);
-	UserList l = new UserList();
-	
-	
-	
-		public static void main(String[] args) {
-			Team9GUI GUI = new Team9GUI();
-			
-		}
-		private Team9GUI() {
-			frame = new JFrame("Hello");
-			frame.setMinimumSize(new Dimension(500,500));
-			frame.setResizable(false);
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			
-			loginPanel();
-			SignUpPanel();
-			
-	
-			
-			
-			frame.pack();
-			frame.setVisible(true);
-		}
+	User user = new User(null, null, null);
+	UserList list = new UserList();
+	// JPanel messagePanel;
+
+	public static void main(String[] args) {
+		Team9GUI GUI = new Team9GUI();
+	}
+
+	private Team9GUI() {
+		signUpFrame = new JFrame("SIGN UP");
+		signUpFrame.setMinimumSize(new Dimension(500, 500));
+		signUpFrame.setResizable(false);
+		signUpFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		signUpPanel();
+		signUpFrame.pack();
+		signUpFrame.setLocationRelativeTo(null);
+		signUpFrame.setVisible(true);
 		
-		private void loginPanel(){
-			 
-			JPanel login = new JPanel();
-			JLabel userL = new JLabel("Username:"); 
-			userF = new JTextField(15);
-			JLabel passL = new JLabel("Password:");
-			passF = new JPasswordField(15);
-			loginB = new JButton("Login");
-			loginB.addActionListener(this);
-			login.add(userL);
-			login.add(userF);
-			login.add(passL);
-			login.add(passF);
-			login.add(loginB);
-			frame.getContentPane().add(BorderLayout.NORTH,login);
-			
-		}
-		private void SignUpPanel(){
-			JPanel signUp = new JPanel();
-			signUp.setLayout(new BoxLayout(signUp,BoxLayout.Y_AXIS));
-			signUp.setAlignmentY(Panel.LEFT_ALIGNMENT);
-			JLabel userSL = new JLabel("Username");
-			userSF = new JTextField(15);
-//			userSF.setMaximumSize(new Dimension(500,TextField.HEIGHT));
-			userSF.setMinimumSize(new Dimension(500,TextField.HEIGHT));
-			JLabel emailSL = new JLabel("email");
-			emailSF = new JTextField(15);
-			emailSF.setMaximumSize(new Dimension(500,TextField.HEIGHT));
-			emailSF.setMinimumSize(new Dimension(500,TextField.HEIGHT));
-			JLabel passwordSL = new JLabel("Password");
-			passwordSF = new JPasswordField(15);
-			passwordSF.setMaximumSize(new Dimension(500,TextField.HEIGHT));
-			passwordSF.setMinimumSize(new Dimension(500,TextField.HEIGHT));
-			signUpButton = new JButton("Sign Up");
-			signUpButton.addActionListener(this);
-			signUp.add(userSL);
-			signUp.add(userSF);
-			signUp.add(emailSL);
-			signUp.add(emailSF);
-			signUp.add(passwordSL);
-			signUp.add(passwordSF);
-			signUp.add(signUpButton);
-			frame.getContentPane().add(BorderLayout.CENTER,signUp);
-		}
-		private void messagePanel() {
-			messagePanel = new JPanel();
-			message= new JLabel("");
-			messagePanel.add(message);
-			frame.getContentPane().add(BorderLayout.SOUTH,messagePanel);
-		}
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			
-			if(e.getSource().equals(loginB)) {
-				User check =l.findUser(userF.getText(), new String(passF.getPassword()));
-				
-			if(userF.getText().equals("")||passF.getPassword().length==0) {
-					JOptionPane.showMessageDialog(frame,"Fill in all fields");
-			}else if(check==null) {
-					JOptionPane.showMessageDialog(frame,"You have provided the wrong credentials");
-				}else {
-					u = check;
-					System.out.println(u.getEmail());
-					JOptionPane.showMessageDialog(frame,"You have logged in");
-					frame.getContentPane().removeAll();
-					frame.repaint();
-				}
+		loginFrame = new JFrame("LOG IN");
+		loginFrame.setMinimumSize(new Dimension(500, 500));
+		loginFrame.setResizable(false);
+		loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		loginFrame.setLocationRelativeTo(null);
+		loginPanel();
+		loginFrame.pack();
+		loginFrame.setVisible(false);
+		
+		accountFrame = new JFrame("ACCOUNT INFORMATION");
+		accountFrame.setMinimumSize(new Dimension(500, 500));
+		accountFrame.setResizable(false);
+		accountFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		accountFrame.setLocationRelativeTo(null);
+		accountPanel();
+		accountFrame.pack();
+		accountFrame.setVisible(false);
+	}
+
+	private void loginPanel() {
+		JPanel login = new JPanel();
+		login.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
+		login.setLayout(new GridLayout(0, 1));
+		JLabel loginTitle = new JLabel("LOG IN", SwingConstants.CENTER);
+		loginTitle.setFont(loginTitle.getFont().deriveFont(24.0f));
+		JLabel userL = new JLabel("Username");
+		userLogIn = new JTextField(15);
+		JLabel passL = new JLabel("Password");
+		passwordLogIn = new JPasswordField(15);
+		loginButton = new JButton("Log In");
+		loginButton.setFont(loginButton.getFont().deriveFont(18.0f));
+		loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		loginButton.addActionListener(this);
+		JLabel signUpOption = new JLabel("Don't have an account? ", SwingConstants.CENTER);
+		signUpLink = new JButton("Sign Up Here");
+		signUpLink.setForeground(Color.BLUE);
+		signUpLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		signUpLink.setBorderPainted(false);
+		signUpLink.setFocusPainted(false);
+		signUpLink.setContentAreaFilled(false);
+		signUpLink.addActionListener(this);
+		login.add(loginTitle);
+		login.add(userL);
+		login.add(userLogIn);
+		login.add(passL);
+		login.add(passwordLogIn);
+		login.add(Box.createRigidArea(new Dimension(2, 0)));
+		login.add(loginButton);
+		login.add(Box.createRigidArea(new Dimension(2, 0)));
+		login.add(signUpOption);
+		login.add(signUpLink);
+		loginFrame.getContentPane().add(BorderLayout.NORTH, login);
+	}
+
+	private void signUpPanel() {
+		JPanel signUp = new JPanel();
+		signUp.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
+		signUp.setLayout(new GridLayout(0, 1));
+		JLabel signUpTitle = new JLabel("SIGN UP", SwingConstants.CENTER);
+		signUpTitle.setFont(signUpTitle.getFont().deriveFont(24.0f));
+		JLabel userSL = new JLabel("Username");
+		userSignUp = new JTextField(15);
+		JLabel emailSL = new JLabel("Email");
+		emailSignUp = new JTextField(15);
+		JLabel passwordSL = new JLabel("Password");
+		passwordSignUp = new JPasswordField(15);
+		signUpButton = new JButton("Sign Up");
+		signUpButton.setFont(signUpButton.getFont().deriveFont(18.0f));
+		signUpButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		signUpButton.addActionListener(this);
+		JLabel loginOption = new JLabel("Already have an account? ", SwingConstants.CENTER);
+		loginLink = new JButton("Log In Here");
+		loginLink.setForeground(Color.BLUE);
+		loginLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		loginLink.setBorderPainted(false);
+		loginLink.setFocusPainted(false);
+		loginLink.setContentAreaFilled(false);
+		loginLink.addActionListener(this);
+		signUp.add(signUpTitle);
+		signUp.add(userSL);
+		signUp.add(userSignUp);
+		signUp.add(emailSL);
+		signUp.add(emailSignUp);
+		signUp.add(passwordSL);
+		signUp.add(passwordSignUp);
+		signUp.add(Box.createRigidArea(new Dimension(2, 0)));
+		signUp.add(signUpButton);
+		signUp.add(Box.createRigidArea(new Dimension(2, 0)));
+		signUp.add(loginOption);
+		signUp.add(loginLink);
+		signUpFrame.getContentPane().add(BorderLayout.CENTER, signUp);
+	}
+
+	private void accountPanel() {
+		JPanel account = new JPanel();
+		account.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
+		account.setLayout(new GridLayout(0, 1));
+		JLabel accountTitle = new JLabel("ACCOUNT INFORMATION", SwingConstants.CENTER);
+		accountTitle.setFont(accountTitle.getFont().deriveFont(24.0f));
+		JLabel username = new JLabel("Username: " + user.getUsername());
+		JLabel email = new JLabel("Email: " + user.getEmail());
+		editButton = new JButton("Edit Account");
+		editButton.setFont(signUpButton.getFont().deriveFont(18.0f));
+		editButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		editButton.addActionListener(this);
+		account.add(accountTitle);
+		account.add(username);
+		account.add(email);
+		account.add(Box.createRigidArea(new Dimension(2, 0)));
+		account.add(editButton);
+		account.add(Box.createRigidArea(new Dimension(2, 0)));
+		accountFrame.getContentPane().add(BorderLayout.CENTER, account);
+	}	
+	
+	// private void messagePanel() {
+	// messagePanel = new JPanel();
+	// message= new JLabel("");
+	// messagePanel.add(message);
+	// frame.getContentPane().add(BorderLayout.SOUTH,messagePanel);
+	// }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource().equals(loginButton)) {
+			User check = list.findUser(userLogIn.getText(), new String(passwordLogIn.getPassword()));
+			if (userLogIn.getText().equals("") || passwordLogIn.getPassword().length == 0) {
+				JOptionPane.showMessageDialog(loginFrame, "Please fill in all fields.");
+			} else if (check == null) {
+				JOptionPane.showMessageDialog(loginFrame, "The username and password do not match.");
+			} else {
+				user = check;
+				JOptionPane.showMessageDialog(loginFrame, "You have logged in!");
+				loginFrame.setVisible(false);
+				accountFrame.setVisible(true);
 			}
-			
-			if(e.getSource().equals(signUpButton)) {
-				if(userSF.getText().equals("")||emailSF.getText().equals("")||passwordSF.getPassword().length==0) {
-					JOptionPane.showMessageDialog(frame,"Fill in all fields");
-					
-				}else if(!u.checkEmail(emailSF.getText())) {
-					JOptionPane.showMessageDialog(frame,"Please fill in valid email");
-				}else if(l.doesEmailExist(emailSF.getText())){
-					JOptionPane.showMessageDialog(frame,"This email already exists");
-				}else if(l.doesUserNameExist(userSF.getText())) {
-					JOptionPane.showMessageDialog(frame,"This username already exists");
-				}else if(!u.checkPasswd(new String(passwordSF.getPassword()) )){
-					JOptionPane.showMessageDialog(frame,"Please fill in valid password");
-				}else {
-					l.addUser(userSF.getText(), (new String(passwordSF.getPassword())), emailSF.getText());
-					JOptionPane.showMessageDialog(frame,"Your account has been created");
-				}
-				
 		}
-		}	
+
+		if (e.getSource().equals(signUpButton)) {
+			if (userSignUp.getText().equals("") || emailSignUp.getText().equals("")
+					|| passwordSignUp.getPassword().length == 0) {
+				JOptionPane.showMessageDialog(signUpFrame, "Please fill in all fields.");
+			} else if (!user.checkEmail(emailSignUp.getText())) {
+				JOptionPane.showMessageDialog(signUpFrame, "The email address provided was not valid.");
+			} else if (list.doesEmailExist(emailSignUp.getText())) {
+				JOptionPane.showMessageDialog(signUpFrame, "This email address already exists in our system.");
+			} else if (list.doesUserNameExist(userSignUp.getText())) {
+				JOptionPane.showMessageDialog(signUpFrame, "This username already exists in our system.");
+			} else if (!user.checkPasswd(new String(passwordSignUp.getPassword()))) {
+				JOptionPane.showMessageDialog(signUpFrame,
+						"Your password must have at least 8 characters containing at least an uppercase letter, a lowercase letter, and a number.");
+			} else {
+				list.addUser(userSignUp.getText(), (new String(passwordSignUp.getPassword())), emailSignUp.getText());
+				JOptionPane.showMessageDialog(signUpFrame, "Your account has been created!");
+				signUpFrame.getContentPane().removeAll();
+				signUpFrame.repaint();
+				signUpFrame.setVisible(false);
+				loginFrame.setVisible(true);
+			}
+		}
+		if (e.getSource().equals(loginLink)) {
+			signUpFrame.setVisible(false);
+			loginFrame.setVisible(true);
+		}		
+		if (e.getSource().equals(signUpLink)) {
+			loginFrame.setVisible(false);
+			signUpFrame.setVisible(true);
+		}
+	}
 }
