@@ -33,6 +33,7 @@ public class Team9GUI implements ActionListener {
 		signUpFrame.pack();
 		signUpFrame.setLocationRelativeTo(null);
 		signUpFrame.setVisible(true);
+		signUpFrame.getRootPane().setDefaultButton(signUpButton);
 		
 		loginFrame = new JFrame("LOG IN");
 		loginFrame.setMinimumSize(new Dimension(500, 500));
@@ -42,6 +43,7 @@ public class Team9GUI implements ActionListener {
 		loginPanel();
 		loginFrame.pack();
 		loginFrame.setVisible(false);
+		loginFrame.getRootPane().setDefaultButton(loginButton);
 		
 		accountFrame = new JFrame("ACCOUNT INFORMATION");
 		accountFrame.setMinimumSize(new Dimension(500, 500));
@@ -51,6 +53,7 @@ public class Team9GUI implements ActionListener {
 		accountPanel();
 		accountFrame.pack();
 		accountFrame.setVisible(false);
+		accountFrame.getRootPane().setDefaultButton(editButton);
 	}
 
 	private void loginPanel() {
