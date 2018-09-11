@@ -86,15 +86,18 @@ public class Team9GUITest extends JFCTestCase  {
 		team9GUI.signUpButton.doClick();
 	}
 	
-	private void nameAndPasswordNotMatch() {
+	private void emptyLoginFields() {
 		team9GUI.loginLink.doClick();
+		team9GUI.loginButton.doClick();
+	}
+	
+	private void nameAndPasswordNotMatch() {
 		team9GUI.userLogIn.setText("name");
 		team9GUI.passwordLogIn.setText("Idaho2020");
 		team9GUI.loginButton.doClick();
 	}
 	
 	private void validLogin() {
-		team9GUI.loginLink.doClick();
 		team9GUI.userLogIn.setText("name");
 		team9GUI.passwordLogIn.setText("Bronco2020");
 		team9GUI.loginButton.doClick();
@@ -129,6 +132,9 @@ public class Team9GUITest extends JFCTestCase  {
 			Thread.sleep(1000);
 			
 			usedEmail();
+			Thread.sleep(1000);
+			
+			emptyLoginFields();
 			Thread.sleep(1000);
 			
 			nameAndPasswordNotMatch();
