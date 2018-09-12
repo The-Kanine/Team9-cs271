@@ -1,10 +1,15 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 /**
  * @author Tuan
  *A list of all users and their information
  */
-public class UserList {
+public class UserList{
 
 private ArrayList<User> userList;
     
@@ -13,6 +18,10 @@ private ArrayList<User> userList;
      */
     public UserList() {
     	userList = new ArrayList<User>();
+    	File temp = new File("user9.txt");
+    	if(temp.exists()) {
+    		readUsers();
+    	}
     }
     
     /**
@@ -25,6 +34,7 @@ private ArrayList<User> userList;
     public void addUser(String userName, String password, String email){
     	if (!doesUserNameExist(userName) && !doesEmailExist(email)) 
     		userList.add(new User(userName,password,email));
+    		writeUsers();
     }
     
     /**
@@ -66,5 +76,34 @@ private ArrayList<User> userList;
     		if(user.matchEmail(email))   
     			return true;   
        return false;
+    }
+    /**
+     * write userList to a file so it can be retrieved
+     */
+    private void writeUsers() {
+    	try {
+    		FileOutputStream users=new FileOutputStream("user9.txt");
+    		ObjectOutputStream write = new ObjectOutputStream(users);
+    		write.writeObject(userList);
+			write.close();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+    }
+    /**
+     * retrieves userList from file
+     */
+    private void readUsers() {
+    	try {
+			FileInputStream  users= new FileInputStream("user9.txt");
+			ObjectInputStream read= new ObjectInputStream(users);
+			userList= (ArrayList<User>) read.readObject();
+			read.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }

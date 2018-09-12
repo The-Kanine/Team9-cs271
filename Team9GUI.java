@@ -216,7 +216,7 @@ public class Team9GUI implements ActionListener {
 			else {
 				list.addUser(userSignUp.getText(), (new String(passwordSignUp.getPassword())), emailSignUp.getText());
 				JOptionPane.showMessageDialog(signUpFrame, "Your account has been created!");
-//				signUpFrame.dispose();
+				signUpFrame.dispose();
 				JPanel loginPanel=loginPanel();
 				loginFrame = setupFrame("LOG IN", loginPanel,true,loginButton);
 			}

@@ -1,10 +1,16 @@
+import java.io.Serializable;
+
 /**
  * @authors Van, Tuan
  * Represents a user (an account). Each account
  * has a username, password, and email.
  */
-public class User {
-
+public class User implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String username,passwd;
 	private String email;
 	private int count;
