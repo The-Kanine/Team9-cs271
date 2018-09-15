@@ -27,5 +27,19 @@ public class UserTest extends TestCase {
 		assertFalse(user.isValidLogin("Tuan", "Bronco2022"));
 		assertFalse(user.isValidLogin("Van", "Bronco2020"));
 	}
-
+	
+	public void testSecurityQuestion(){
+		
+		//no edit
+		user = new User("Tuan", "Bronco2020","tuan@boisestate.edu");
+		assertFalse(user.matchAnswer("Boise"));
+		
+		//modify the answer (wrong answer)
+		user.setAnswer("Meridian");
+		assertFalse(user.matchAnswer("Boise"));
+		
+		//modify the answer (right answer)
+		user.setAnswer("Boise");
+		assertTrue(user.matchAnswer("Boise"));	
+	}
 }

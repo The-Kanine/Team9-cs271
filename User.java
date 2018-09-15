@@ -3,7 +3,7 @@ import java.io.Serializable;
 /**
  * @authors Van, Tuan
  * Represents a user (an account). Each account
- * has a username, password, and email.
+ * has a username, password, email, and security question answer.
  */
 public class User implements Serializable{
 	
@@ -13,6 +13,7 @@ public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String username,passwd;
 	private String email;
+	private String answer;
 	private int count;
 
 	/**
@@ -26,6 +27,22 @@ public class User implements Serializable{
 		this.passwd=passwd;
 		this.email=email;
 		count=0;
+	}
+	
+	/**
+	 * Returns the answer of the security question
+	 * @return answer
+	 */
+	public String getAnswer() {
+		return answer;
+	}
+	
+	/**
+	 * @param answer
+	 * Sets the answer of the security question
+	 */
+	public void setAnswer(String answer) {
+		this.answer=answer;
 	}
 	
 	/**
@@ -132,6 +149,15 @@ public class User implements Serializable{
 		return matchUserName(userName) && matchPassword(password);
 	}
 
+	/**
+	 * @param answer
+	 * @return a boolean
+	 * Checks if the given answer matches with the user's answer
+	 */
+	public boolean matchAnswer(String answer) {
+		return answer!=null && answer.equals(this.answer);
+	}
+	
 	/**
 	 * @param userName
 	 * @return a boolean

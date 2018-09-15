@@ -52,6 +52,25 @@ private ArrayList<User> userList;
     }
     
     /**
+     * @param currentUser, userName
+     * @return a boolean
+     * Checks if a username already exists.
+     * If the input username is the same as the currentUser's username, it will return false.
+     * It means the current user's username is still a valid username/does not count as
+     * invalid because it already exists.
+     */
+    public boolean doesUserNameExist2(User currentUser, String userName){
+    	if (currentUser.matchUserName(userName))
+    		return false;
+    	for (User user: userList) {
+    		if(user.matchUserName(userName)) {   
+    			return true;   
+    		}	
+    	}
+       return false;
+    }
+    
+    /**
      * @param userName
      * @param password
      * @return a User object
@@ -67,6 +86,23 @@ private ArrayList<User> userList;
     }
     
     /**
+     * @param currentUser, email
+     * @return a boolean
+     * Checks if an email already exists
+     * If the input email is the same as the currentUser's email, it will return false.
+     * It means the current user's email is still a valid email/does not count as
+     * invalid because it already exists.
+     */
+    public boolean doesEmailExist2(User currentUser, String email){
+    	if (currentUser.matchEmail(email))
+    		return false;
+    	for (User user: userList)
+    		if(user.matchEmail(email))   
+    			return true;   
+       return false;
+    }
+    
+    /**
      * @param email
      * @return a boolean
      * Checks if an email already exists
@@ -77,6 +113,7 @@ private ArrayList<User> userList;
     			return true;   
        return false;
     }
+    
     /**
      * write userList to a file so it can be retrieved
      */
