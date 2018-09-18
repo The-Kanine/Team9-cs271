@@ -148,6 +148,16 @@ public class User implements Serializable{
 	public boolean isValidLogin(String userName, String password) {
 		return matchUserName(userName) && matchPassword(password);
 	}
+	
+	/**
+	 * @param email
+	 * @param answer
+	 * @return a boolean
+	 * Checks if a email and answer match with those of the user
+	 */
+	public boolean isAuthentic(String email, String answer) {
+		return matchEmail(email) && matchAnswer(answer);
+	}
 
 	/**
 	 * @param answer

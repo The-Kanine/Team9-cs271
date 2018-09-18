@@ -24,6 +24,14 @@ private ArrayList<User> userList;
     	}
     }
     
+    public User getUserAtIndex(int index) {
+    	return userList.get(index);
+    }
+    
+    public void setUserAtIndex(int index, User user) {
+    	userList.set(index, user);
+    }
+    
     /**
      * @param userName
      * @param password
@@ -73,16 +81,33 @@ private ArrayList<User> userList;
     /**
      * @param userName
      * @param password
-     * @return a User object
-     * Searches the list and find the user that has the matching username and password
+     * @return the index of a user or -1 if user not found
+     * Searches the list and find the index of the user that has the matching username and password
      */
-    public User findUser(String userName, String password){
-    	for (User user: userList) {
+    public int findUserIndex(String userName, String password){
+    	for (int i = 0; i < userList.size(); i++) {
+    		User user = userList.get(i);
     		if(user.isValidLogin(userName, password)) {   
-    			return user;   
+    			return i;   
     		}	
     	}
-       return null;
+       return -1;
+    }
+    
+    /**
+     * @param email
+     * @param password
+     * @return the index of a user or -1 if user not found
+     * Searches the list and find the index of the user that has the matching email and (security question) answer
+     */
+    public int findUserIndex2(String email, String answer){
+    	for (int i = 0; i < userList.size(); i++) {
+    		User user = userList.get(i);
+    		if(user.isAuthentic(email, answer)) {   
+    			return i;   
+    		}	
+    	}
+       return -1;
     }
     
     /**
