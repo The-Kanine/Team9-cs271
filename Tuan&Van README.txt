@@ -2,14 +2,41 @@ Tuan & Van README
 
 1. User.java
 New external variables: answer
-New methods: getAnswer(), setAnswer(), and matchAnswer()
+New methods: getAnswer(), setAnswer(), matchAnswer(), and isAuthentic()
 
 2. UserTest.java
 New method: testSecurityQuestion()
+Changes to testNewAccount()
 
 3. UserList.java
-New methods: doesUserNameExist2() and doesEmailExist2()
-***Please use these for Story 3 (Edit account)!*** Check the spreadsheet for more info
+New methods: doesUserNameExist2(), doesEmailExist2(), findUserIndex(), findUserIndex2(),getUserAtIndex(),
+and setUserAtIndex()
+
+!!!!!!!!!!!!!!!!Please use!!!!!!!!!!!!!!!!
+getUserAtIndex() and setUserAtIndex()
+findUserIndex() for criteria 2.4
+doesUserNameExist2() for criteria 3.4
+doesEmailExist2() for criteria 3.5
+findUserIndex2() for criteria 5.6
+
+We're going to operate on indices.
+The steps are:
+
+1. Find the user of interest's index
+Ex (after a valid login): int index = findUserIndex(userLogIn.getText(), new String(passwordLogIn.getPassword()));
+
+2. Assign the user at that index to a new User object
+Ex: User user = list.getUserAtIndex(index);
+
+3. Make changes to that new User object 
+Ex (after the user editted their username): user.setUserName(userNameEdit.getText());
+
+4. Set the original user to the new User object (setUserAtIndex()).
+Ex: list.setUserAtIndex(index, user);
+
+So we cannot lose the original user's index at any point.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Check the spreadsheet for more info
 
 4. UserListTest.java
 No new method. Changes to current methods (tests for new UserList methods).
@@ -27,9 +54,9 @@ and won’t run.
 
 a. Edit account
 Panel: accountPanel (not new)
-Button (accountPanel): editButton (not new)
-New buttons (accountPanel): doneButton, logOutButton
-New text fields (accountPanel): userNameEdit, emailEdit, answerEdit
+Button in accountPanel: editButton (not new)
+New buttons in accountPanel: doneButton, logOutButton
+New text fields in accountPanel: userNameEdit, emailEdit, answerEdit
 
 b. Forgot username
 Panel: LoginPanel (not new)
