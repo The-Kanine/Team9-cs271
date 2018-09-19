@@ -41,7 +41,7 @@ Check the spreadsheet for more info
 4. UserListTest.java
 No new method. Changes to current methods (tests for new UserList methods).
 
-5. Team9GUITest.java               ***PLEASE READ!***
+5. New test classes               ***PLEASE READ!***
 - Above each test case, we put what the expected (pop-up) message should be. We also put the acceptance criteria
 number there (Edit, forgotUName & forgotPass).
 - Each test case is independent now. You can comment out the test cases that you don't need.
