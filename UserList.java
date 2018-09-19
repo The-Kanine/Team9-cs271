@@ -1,5 +1,3 @@
-package codepack;
-
 import java.util.ArrayList;
 
 /**
