@@ -1,4 +1,4 @@
-import org.junit.After;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,10 +33,10 @@ public class ForgotPasswordTest {
 		//edit answer
 		team9GUI.editButton.doClick();
 		team9GUI.answerEdit.setText("Watermelon");
-		team9GUI.doneButton.doClick();
-		team9GUI.logOutButton.doClick();
+		team9GUI.editButton.doClick();
+		team9GUI.logoutLink.doClick();
 		
-		team9GUI.forgotPasswordButton.doClick();
+		team9GUI.forgotPasswordLink.doClick();
 	}
 	
 	@Test
@@ -45,7 +45,7 @@ public class ForgotPasswordTest {
 	// Switches to SecurityQuestionPanel
 	// Expected message: "Please fill in all fields."
 	public void forgotPEmptyFields() {
-		team9GUI.continueButton.doClick();
+		team9GUI.changePasswordButton.doClick();
 	}
 	
 	@Test
@@ -53,7 +53,7 @@ public class ForgotPasswordTest {
 	//forgot password security question cancel
 	// No expect message. Switches back to login screen
 	public void securityCancel() {
-		team9GUI.securityCancelButton.doClick();
+		team9GUI.exitPasswordLink.doClick();
 	}
 
 	@Test
@@ -62,9 +62,9 @@ public class ForgotPasswordTest {
 	// Switches to SecurityQuestionPanel
 	//expect message "The email address provided does not exist in our system."
 	public void forgotPNonExistingEmail() {
-		team9GUI.forgotPEmail.setText("non-existing email");
-		team9GUI.forgotPAnswer.setText("Coconut");
-		team9GUI.continueButton.doClick();
+		team9GUI.emailPassword.setText("non-existing email");
+		team9GUI.answerPassword.setText("Coconut");
+		team9GUI.changePasswordButton.doClick();
 	}
 	
 	@Test
@@ -72,31 +72,21 @@ public class ForgotPasswordTest {
 	//forgot password existing email, incorrect answer
 	//expect message "Your answer is incorrect." 
 	public void forgotPIncorrectAnswer() {
-		team9GUI.forgotPEmail.setText("name@gmail.com");
-		team9GUI.forgotPAnswer.setText("Coconut");
-		team9GUI.continueButton.doClick();
+		team9GUI.emailPassword.setText("name@gmail.com");
+		team9GUI.answerPassword.setText("Coconut");
+		team9GUI.changePasswordButton.doClick();
 	}
 	
-	@Test
-	// 5.6
-	//forgot password existing email, correct answer
-	//No expect message. Switches back to ResetPasswordPanel
-	public void forgotPCorrectAnswer() {
-		team9GUI.forgotPEmail.setText("name@gmail.com");
-		team9GUI.forgotPAnswer.setText("Watermelon");
-		team9GUI.continueButton.doClick();
-	}
 	
 	@Test
 	// 5.8
 	// forgot password empty fields
 	// Expected message: "Please fill in all fields."
 	public void forgotPEmptyPass() {
-		team9GUI.forgotPEmail.setText("name@gmail.com");
-		team9GUI.forgotPAnswer.setText("Watermelon");
-		team9GUI.continueButton.doClick();
+		team9GUI.emailPassword.setText("name@gmail.com");
+		team9GUI.answerPassword.setText("Watermelon");
+		team9GUI.changePasswordButton.doClick();
 		
-		team9GUI.resetPasswordButton.doClick();
 	}
 	
 	@Test
@@ -105,12 +95,12 @@ public class ForgotPasswordTest {
 	// Expected message: "Your password must have at least 8 characters
 	// containing at least an uppercase letter, a lowercase letter, and a number."
 	public void shortNewPassword() {
-		team9GUI.forgotPEmail.setText("name@gmail.com");
-		team9GUI.forgotPAnswer.setText("Watermelon");
-		team9GUI.continueButton.doClick();
+		team9GUI.emailPassword.setText("name@gmail.com");
+		team9GUI.answerPassword.setText("Watermelon");
 		
-		team9GUI.newPassword.setText("Bsu2020");
-		team9GUI.resetPasswordButton.doClick();
+		
+		team9GUI.passwordPassword.setText("Bsu2020");
+		team9GUI.changePasswordButton.doClick();
 	}
 	
 	@Test
@@ -119,12 +109,12 @@ public class ForgotPasswordTest {
 	// Expected message: "Your password must have at least 8 characters
 	// containing at least an uppercase letter, a lowercase letter, and a number."
 	public void noUppercaseNewPassword() {
-		team9GUI.forgotPEmail.setText("name@gmail.com");
-		team9GUI.forgotPAnswer.setText("Watermelon");
-		team9GUI.continueButton.doClick();
+		team9GUI.emailPassword.setText("name@gmail.com");
+		team9GUI.answerPassword.setText("Watermelon");
 		
-		team9GUI.newPassword.setText("bronco2020");
-		team9GUI.resetPasswordButton.doClick();
+		
+		team9GUI.passwordPassword.setText("bronco2020");
+		team9GUI.changePasswordButton.doClick();
 	}
 	
 	@Test
@@ -133,12 +123,12 @@ public class ForgotPasswordTest {
 	// Expected message: "Your password must have at least 8 characters
 	// containing at least an uppercase letter, a lowercase letter, and a number."
 	public void noLowercaseNewPassword() {
-		team9GUI.forgotPEmail.setText("name@gmail.com");
-		team9GUI.forgotPAnswer.setText("Watermelon");
-		team9GUI.continueButton.doClick();
+		team9GUI.emailPassword.setText("name@gmail.com");
+		team9GUI.answerPassword.setText("Watermelon");
 		
-		team9GUI.newPassword.setText("BRONCO2020");
-		team9GUI.resetPasswordButton.doClick();
+		
+		team9GUI.passwordPassword.setText("BRONCO2020");
+		team9GUI.changePasswordButton.doClick();
 	}
 	
 	@Test
@@ -146,13 +136,12 @@ public class ForgotPasswordTest {
 	// forgot password no ditgit Password
 	// Expected message: "Your password must have at least 8 characters
 	// containing at least an uppercase letter, a lowercase letter, and a number."
-	public void noDigitnewPassword() {
-		team9GUI.forgotPEmail.setText("name@gmail.com");
-		team9GUI.forgotPAnswer.setText("Watermelon");
-		team9GUI.continueButton.doClick();
+	public void noDigitpasswordPassword() {
+		team9GUI.emailPassword.setText("name@gmail.com");
+		team9GUI.answerPassword.setText("Watermelon");
 		
-		team9GUI.newPassword.setText("BoiseState");
-		team9GUI.resetPasswordButton.doClick();
+		team9GUI.passwordPassword.setText("BoiseState");
+		team9GUI.changePasswordButton.doClick();
 	}
 	
 	@Test
@@ -160,23 +149,19 @@ public class ForgotPasswordTest {
 	// forgot password valid new password
 	// Expected message:  "Your password has been changed."
 	public void validNewPassword() {
-		team9GUI.forgotPEmail.setText("name@gmail.com");
-		team9GUI.forgotPAnswer.setText("Watermelon");
-		team9GUI.continueButton.doClick();
-		
-		team9GUI.newPassword.setText("Bronco2022");
-		team9GUI.resetPasswordButton.doClick();
+		team9GUI.emailPassword.setText("name@gmail.com");
+		team9GUI.answerPassword.setText("Watermelon");
+		team9GUI.passwordPassword.setText("Bronco2022");
+		team9GUI.changePasswordButton.doClick();
 	}
 	
-	@Test
+	//@Test
 	// 5.7
 	//forgot password reset password cancel
 	// No expect message. Switches back to login screen
-	public void resetPasswordCancel() {
-		team9GUI.forgotPEmail.setText("name@gmail.com");
-		team9GUI.forgotPAnswer.setText("Watermelon");
-		team9GUI.continueButton.doClick();
-		
-		team9GUI.resetPasswordCancelButton.doClick();
-	}
+//	public void resetPasswordCancel() {
+//		team9GUI.emailPassword.setText("name@gmail.com");
+//		team9GUI.answerPassword.setText("Watermelon");
+//		team9GUI.exitPasswordLink.doClick();
+//	}
 }

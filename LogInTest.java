@@ -1,4 +1,4 @@
-package codepack;
+
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,7 +14,7 @@ public class LogInTest {
 	public Team9GUI team9GUI = null;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		team9GUI = new Team9GUI();
 		
 		//sign-up

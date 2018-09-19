@@ -1,4 +1,4 @@
-package codepack;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -23,10 +23,10 @@ import javax.swing.SwingConstants;
  * @author Kalli Plumer, Keaton Gillihan
  */
 public class Team9GUI implements ActionListener {
-	public JFrame signUpFrame, loginFrame, accountFrame;
-	public JButton loginButton, loginLink, signUpButton, signUpLink, editButton, logoutLink;
-	JTextField userSignUp, emailSignUp, userLogIn, usernameField, emailField, passwordField, answerField;
-	JPasswordField passwordSignUp, passwordLogIn;
+	public JFrame signUpFrame, loginFrame, accountFrame, passwordFrame;
+	public JButton loginButton, loginLink, signUpButton,changePasswordButton, signUpLink, editButton, logoutLink, exitPasswordLink,forgotPasswordLink;
+	JTextField userSignUp, emailSignUp, userLogIn, usernameEdit, emailEdit, answerEdit, emailPassword, answerPassword;
+	JPasswordField passwordSignUp, passwordLogIn, passwordEdit, passwordPassword;
 	JLabel message;
 	User user= new User(null, null, null);
 	UserList list = new UserList();
@@ -44,6 +44,10 @@ public class Team9GUI implements ActionListener {
 		JPanel signUpPanel= signUpPanel();
 		signUpFrame = setupFrame("SIGN UP", signUpPanel,true,signUpButton);		
 	}
+	
+	public void quit() {
+		
+	}
 	/**
 	 * this method creates a login panel that contains everything that
 	 * an existing user would need to login(a username field, a password field,
@@ -60,6 +64,7 @@ public class Team9GUI implements ActionListener {
 		loginButton = createButton("Log In");
 		JLabel signUpOption = new JLabel("Don't have an account? ", SwingConstants.CENTER);
 		signUpLink = createLink("Sign Up Here");
+		forgotPasswordLink = createLink("Forgot Password");
 		//add Components to loginPanel
 		login.add(userL);
 		login.add(userLogIn);
@@ -70,6 +75,7 @@ public class Team9GUI implements ActionListener {
 		login.add(Box.createRigidArea(new Dimension(2, 0)));
 		login.add(signUpOption);
 		login.add(signUpLink);
+		login.add(forgotPasswordLink);
 		return login;
 	}
 	/**
@@ -105,7 +111,7 @@ public class Team9GUI implements ActionListener {
 		return signUp;
 	}
 	/**
-	 * This method creates a panel that displays a logged in users information
+	 * This method creates a panel that displays and lets you edit the users information
 	 * @return
 	 */
 	private JPanel accountPanel() {
@@ -113,35 +119,61 @@ public class Team9GUI implements ActionListener {
 		JPanel account = setupPanel("ACCOUNT INFORMATION");
 		JLabel username = new JLabel("Username: " + user.getUsername());
 		
-		usernameField = new JTextField(user.getUsername(),15);
-		usernameField.setEditable(false);
+		usernameEdit = new JTextField(user.getUsername(),15);
+		usernameEdit.setEditable(false);
 		JLabel email = new JLabel("Email: "+user.getEmail());
-		emailField = new JTextField(user.getEmail(),15);
-		emailField.setEditable(false);
+		emailEdit = new JTextField(user.getEmail(),15);
+		emailEdit.setEditable(false);
 		JLabel password = new JLabel("Password: ");
-		passwordField = new JTextField(15);
-		passwordField.setEditable(false);
+		passwordEdit = new JPasswordField(user.getPassword(),15);
+		passwordEdit.setEditable(false);
 		JLabel question = new JLabel("What is your favorite color?");
-		answerField = new JTextField(15);
-		answerField.setEditable(false);
+		answerEdit = new JTextField(user.getAnswer(),15);
+		answerEdit.setEditable(false);
 		
 		editButton = createButton("Edit Account");
 		logoutLink = createLink("Logout");
 		//add components to accountPanel
 		account.add(username);
-		account.add(usernameField);
+		account.add(usernameEdit);
 		account.add(email);
-		account.add(emailField);
+		account.add(emailEdit);
 		account.add(password);
-		account.add(passwordField);
+		account.add(passwordEdit);
 		account.add(question);
-		account.add(answerField);
+		account.add(answerEdit);
 		account.add(Box.createRigidArea(new Dimension(2, 0)));
 		account.add(editButton);
 		account.add(logoutLink);
 		account.add(Box.createRigidArea(new Dimension(2, 0)));
 		return account;
 	}	
+	/**
+	 * This method creates a panel that lets a user change their password
+	 * @return
+	 */
+	private JPanel passwordPanel() {
+		JPanel password = setupPanel("RESET PASSWORD");
+		JLabel email = new JLabel("email:");
+		emailPassword = new JTextField(15);
+		JLabel question = new JLabel("What is your Favorite Color?");
+		answerPassword = new JTextField(15);
+		JLabel newPassword = new JLabel("New Password:");
+		passwordPassword = new JPasswordField(15);
+		changePasswordButton = createButton("Reset Password");
+		exitPasswordLink = createLink("Log In");
+		
+		password.add(email);
+		password.add(emailPassword);
+		password.add(question);
+		password.add(answerPassword);
+		password.add(newPassword);
+		password.add(passwordPassword);
+		password.add(Box.createRigidArea(new Dimension(2, 0)));
+		password.add(changePasswordButton);
+		password.add(exitPasswordLink);
+		return password;
+	}
 	/**
 	 * This method is used to create a button that looks like a link
 	 * @param text
@@ -220,10 +252,16 @@ public class Team9GUI implements ActionListener {
 			else {
 				user = check;
 				JOptionPane.showMessageDialog(loginFrame, "You have logged in!");
-				loginFrame.setVisible(false);
+				loginFrame.dispose();
 				JPanel accountPanel= accountPanel();
 				accountFrame = setupFrame("ACCOUNT INFORMATION", accountPanel,true,editButton);
 			}
+		}
+		// 
+		if(e.getSource().equals(forgotPasswordLink)) {
+			loginFrame.dispose();
+			JPanel passwordPanel = passwordPanel();
+			passwordFrame = setupFrame("FORGOT PASSWORD",passwordPanel,true,changePasswordButton);
 		}
 		// the sign up button on the sign up page is clicked
 		if (e.getSource().equals(signUpButton)) {
@@ -271,35 +309,82 @@ public class Team9GUI implements ActionListener {
 			signUpFrame = setupFrame("SIGN UP", signUpPanel,true,loginButton);
 		}
 		if (e.getSource().equals(editButton)) {	
-			//clicked++; 
-			usernameField.setEditable(true);
-			emailField.setEditable(true);
-			passwordField.setEditable(true);
-			answerField.setEditable(true);
+			if(editButton.getText().equals("Edit Account")) {
+			usernameEdit.setEditable(true);
+			emailEdit.setEditable(true);
+			passwordEdit.setEditable(true);
+			answerEdit.setEditable(true);
 			editButton.setText("Save Information");
-			
-			if (usernameField.getText().equals("") || emailField.getText().equals("")
-					|| passwordField.getText().equals(0)) {
+			}else
+			if (usernameEdit.getText().equals("") || emailEdit.getText().equals("")
+					|| passwordEdit.getPassword().length==0 || answerEdit.getText().equals("")) {
 				JOptionPane.showMessageDialog(accountFrame, "Please fill in all fields.");
-			} else if (!user.checkPasswd(new String(passwordField.getText()))) {
+			} else 	//invalid email address
+				if (!user.checkEmail(emailSignUp.getText())) {
+			JOptionPane.showMessageDialog(accountFrame, "The email address provided was not valid.");
+				}
+			//used email address
+				else if (list.doesEmailExist(emailSignUp.getText())&& !emailSignUp.getText().equals(user.getEmail())) {
+			JOptionPane.showMessageDialog(accountFrame, "This email address already exists in our system.");
+				}
+			//used username
+				else if (list.doesUserNameExist(userSignUp.getText())&& !userSignUp.getText().equals(user.getUsername())) {
+			JOptionPane.showMessageDialog(accountFrame, "This username already exists in our system.");
+			}else
+			
+				
+				if (!user.checkPasswd(new String(passwordEdit.getPassword()))) {
 				JOptionPane.showMessageDialog(accountFrame,
 						"Your password must have at least 8 characters containing at least an uppercase letter, a lowercase letter, and a number.");
-			} 
-			
+			}
 			else {
 				
-				user.setUserName(usernameField.getText());
-				user.setPasswd(new String(passwordField.getText()));
-				user.setEmail(emailField.getText());
-				user.setAnswer(answerField.getText());
+				user.setUserName(usernameEdit.getText());
+				user.setPasswd(new String(passwordEdit.getPassword()));
+				user.setEmail(emailEdit.getText());
+				user.setAnswer(answerEdit.getText());
 //    			list.addUser(usernameField.getText(), (new String(passwordField.getText())), emailField.getText());
 				JOptionPane.showMessageDialog(accountFrame, "Your account has been updated!");
-				
-				accountFrame.getContentPane().removeAll();
-				accountFrame.repaint();
-				accountFrame.setVisible(false);
-				loginFrame.setVisible(true);
+				accountFrame.dispose();
+				JPanel accountPanel= accountPanel();
+				accountFrame = setupFrame("ACCOUNT INFORMATION", accountPanel,true,editButton);
 			}
-		}	
+		}
+		// the change password button on reset password page is clicked
+		if(e.getSource().equals(changePasswordButton)) {
+			
+			if(emailPassword.getText().equals("")||answerPassword.getText().equals("")||passwordPassword.getPassword().length==0) {
+				JOptionPane.showMessageDialog(passwordFrame, "Please fill in all fields.");
+			}else
+			if(!list.doesEmailExist(emailPassword.getText())) {
+				JOptionPane.showMessageDialog(passwordFrame, "That email address is not in our System");
+			}else
+				
+			if(list.findUser2(emailPassword.getText(), answerPassword.getText())==null) {
+				JOptionPane.showMessageDialog(passwordFrame, "The security question answer is incorrect");
+			}else
+				if (!user.checkPasswd(new String(passwordPassword.getPassword()))) {
+					JOptionPane.showMessageDialog(passwordFrame,
+							"Your password must have at least 8 characters containing at least an uppercase letter, a lowercase letter, and a number.");
+				}
+				else {
+					user= list.findUser2(emailPassword.getText(), answerPassword.getText());
+					user.setPasswd(new String(passwordPassword.getPassword()));
+					JOptionPane.showMessageDialog(passwordFrame, "Your password has been reset");
+					passwordFrame.dispose();
+					JPanel loginPanel=loginPanel();
+					loginFrame = setupFrame("LOG IN", loginPanel,true,loginButton);
+				}
+		}
+		if (e.getSource().equals(logoutLink)) {
+			accountFrame.dispose();
+			JPanel loginPanel=loginPanel();
+			loginFrame = setupFrame("LOG IN", loginPanel,true,loginButton);
+		}
+		if(e.getSource().equals(exitPasswordLink)) {
+			passwordFrame.dispose();
+			JPanel loginPanel=loginPanel();
+			loginFrame = setupFrame("LOG IN", loginPanel,true,loginButton);
+		}
 	}
 }

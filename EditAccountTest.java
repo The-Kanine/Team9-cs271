@@ -1,3 +1,7 @@
+
+
+
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,7 +54,7 @@ public class EditAccountTest {
 	// as the answer field for the security question is empty
 	public void accountNoEdit() {
 		team9GUI.editButton.doClick();
-		team9GUI.doneButton.doClick();
+		team9GUI.editButton.doClick();
 	}
 	
 	@Test
@@ -60,7 +64,7 @@ public class EditAccountTest {
 	public void answerEdit() {
 		team9GUI.editButton.doClick();
 		team9GUI.answerEdit.setText("Watermelon");
-		team9GUI.doneButton.doClick();
+		team9GUI.editButton.doClick();
 	}	
 	
 	@Test
@@ -69,8 +73,8 @@ public class EditAccountTest {
 	public void editUserNameEmpty() {
 		team9GUI.editButton.doClick();
 		team9GUI.answerEdit.setText("Watermelon");
-		team9GUI.userNameEdit.setText("");
-		team9GUI.doneButton.doCLick();
+		team9GUI.usernameEdit.setText("");
+		team9GUI.editButton.doClick();
 	}
 	
 	@Test
@@ -79,9 +83,9 @@ public class EditAccountTest {
 	public void editEmailEmpty() {
 		team9GUI.editButton.doClick();
 		team9GUI.answerEdit.setText("Watermelon");
-		team9GUI.userNameEdit.setText("name2");
+		team9GUI.usernameEdit.setText("name2");
 		team9GUI.emailEdit.setText("");
-		team9GUI.doneButton.doCLick();
+		team9GUI.editButton.doClick();
 	}
 	
 	@Test
@@ -90,9 +94,9 @@ public class EditAccountTest {
 	public void editUserNameUsed() {
 		team9GUI.editButton.doClick();
 		team9GUI.answerEdit.setText("Watermelon");
-		team9GUI.userNameEdit.setText("name2");
+		team9GUI.usernameEdit.setText("name2");
 		team9GUI.emailEdit.setText("name3@gmail.com");
-		team9GUI.doneButton.doCLick();
+		team9GUI.editButton.doClick();
 	}
 	
 	@Test
@@ -101,9 +105,9 @@ public class EditAccountTest {
 	public void editEmailUsed() {
 		team9GUI.editButton.doClick();
 		team9GUI.answerEdit.setText("Watermelon");
-		team9GUI.userNameEdit.setText("name3");
+		team9GUI.usernameEdit.setText("name3");
 		team9GUI.emailEdit.setText("name2@gmail.com");
-		team9GUI.doneButton.doCLick();
+		team9GUI.editButton.doClick();
 	}
 	
 	@Test
@@ -112,9 +116,9 @@ public class EditAccountTest {
 	public void editEmailInvalid() {
 		team9GUI.editButton.doClick();
 		team9GUI.answerEdit.setText("Watermelon");
-		team9GUI.userNameEdit.setText("name3");
+		team9GUI.usernameEdit.setText("name3");
 		team9GUI.emailEdit.setText("name3gmail.com");
-		team9GUI.doneButton.doCLick();
+		team9GUI.editButton.doClick();
 	}
 	
 	@Test
@@ -123,15 +127,15 @@ public class EditAccountTest {
 	public void editEmailValid() {
 		team9GUI.editButton.doClick();
 		team9GUI.answerEdit.setText("Watermelon");
-		team9GUI.userNameEdit.setText("name3");
+		team9GUI.usernameEdit.setText("name3");
 		team9GUI.emailEdit.setText("name3@gmail.com");
-		team9GUI.doneButton.doCLick();
+		team9GUI.editButton.doClick();
 	}
 	
 	@Test
 	// 3.1
 	// No expected message. Go back to LoginPanel
-	public void logOut() {
-		team9GUI.logOutButton.doClick();
+	public void logout() {
+		team9GUI.logoutLink.doClick();
 	}
 }

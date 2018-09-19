@@ -1,4 +1,4 @@
-package codepack;
+
 
 import java.io.Serializable;
 
@@ -28,6 +28,7 @@ public class User implements Serializable{
 		this.username=username;
 		this.passwd=passwd;
 		this.email=email;
+		this.answer="";
 		count=0;
 	}
 	

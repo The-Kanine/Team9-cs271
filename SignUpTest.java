@@ -1,4 +1,4 @@
-package codepack;
+
 
 import org.junit.After;
 import org.junit.Before;
@@ -20,6 +20,7 @@ public class SignUpTest {
 
 	@After
 	public void tearDown() throws Exception {
+		
 	}
 	
 	@Test
