@@ -42,11 +42,9 @@ Check the spreadsheet for more info
 No new method. Changes to current methods (tests for new UserList methods).
 
 5. Team9GUITest.java               ***PLEASE READ!***
-- We will figure out how to make it into several test cases and not one big test case with many assertions later.
 - Above each test case, we put what the expected (pop-up) message should be. We also put the acceptance criteria
-number there (from 3.1).
-- We recommend that you run the test class from start to end every single time, because many test cases rely on
-the actions of previous test case(s). If you want it to to run faster, just comment out the Thread.sleep(1000)’s. 
+number there (Edit, forgotUName & forgotPass).
+- Each test case is independent name. You can comment out the test cases that you don't need.
 - We have also updated the acceptance criteria for story 3, 4, and 5. So if you are confused about the design,
 you can check the spreadsheet.
 - You have to name the buttons and text fields to what we have below or the test class will always have errors
