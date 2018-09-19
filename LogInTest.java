@@ -16,6 +16,7 @@ public class LogInTest {
 		team9GUI = new Team9GUI();
 		
 		//sign-up
+		// Expected message: "Your account has been created!"
 		team9GUI.userSignUp.setText("name");
 		team9GUI.emailSignUp.setText("name@gmail.com");
 		team9GUI.passwordSignUp.setText("Bronco2020");
