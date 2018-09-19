@@ -33,10 +33,11 @@ thinking.
 
 ## Testing
 
-We have three test classes. They use JUnit 4. They are:
+We have 7 test classes. They use JUnit 4. They are:
 - UserTest.java for User.java
 - UserListTest.java for UserList.java
-- Team9GUITest.java for Team9GUI.java
+- SignUpTest.java, LogInTest.java, EditAccount.java, ForgotUsername.java,
+and ForgotPassword for Team9GUI.java
 Details about them are in our backlog.
 All of our products pass all of our test cases.
 
