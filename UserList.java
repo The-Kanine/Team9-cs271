@@ -18,14 +18,17 @@ private ArrayList<User> userList;
      */
     public UserList() {
     	userList = new ArrayList<User>();
-    	File temp = new File("user9.txt");
-    	if(temp.exists()) {
-    		readUsers();
-    	}
+//    	File temp = new File("user9.txt");
+//    	if(temp.exists()) {
+//    		readUsers();
+//    	}
     }
     
     public User getUserAtIndex(int index) {
-    	return userList.get(index);
+    	if (index >= 0)
+    		return userList.get(index);
+    	else
+    		return null;
     }
     
     public void setUserAtIndex(int index, User user) {
@@ -42,7 +45,7 @@ private ArrayList<User> userList;
     public void addUser(String userName, String password, String email){
     	if (!doesUserNameExist(userName) && !doesEmailExist(email)) 
     		userList.add(new User(userName,password,email));
-    		writeUsers();
+//    		writeUsers();
     }
     
     /**
@@ -139,33 +142,33 @@ private ArrayList<User> userList;
        return false;
     }
     
-    /**
-     * write userList to a file so it can be retrieved
-     */
-    private void writeUsers() {
-    	try {
-    		FileOutputStream users=new FileOutputStream("user9.txt");
-    		ObjectOutputStream write = new ObjectOutputStream(users);
-    		write.writeObject(userList);
-			write.close();
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-    }
-    /**
-     * retrieves userList from file
-     */
-    private void readUsers() {
-    	try {
-			FileInputStream  users= new FileInputStream("user9.txt");
-			ObjectInputStream read= new ObjectInputStream(users);
-			userList= (ArrayList<User>) read.readObject();
-			read.close();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
+//    /**
+//     * write userList to a file so it can be retrieved
+//     */
+//    private void writeUsers() {
+//    	try {
+//    		FileOutputStream users=new FileOutputStream("user9.txt");
+//    		ObjectOutputStream write = new ObjectOutputStream(users);
+//    		write.writeObject(userList);
+//			write.close();
+//			
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}	
+//    }
+//    /**
+//     * retrieves userList from file
+//     */
+//    private void readUsers() {
+//    	try {
+//			FileInputStream  users= new FileInputStream("user9.txt");
+//			ObjectInputStream read= new ObjectInputStream(users);
+//			userList= (ArrayList<User>) read.readObject();
+//			read.close();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//    }
 }
