@@ -1,3 +1,5 @@
+package codepack;
+
 import java.io.Serializable;
 
 /**

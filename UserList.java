@@ -1,8 +1,5 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+package codepack;
+
 import java.util.ArrayList;
 
 /**
@@ -84,34 +81,64 @@ private ArrayList<User> userList;
     /**
      * @param userName
      * @param password
-     * @return the index of a user or -1 if user not found
-     * Searches the list and find the index of the user that has the matching username and password
+     * @return a User object
+     * Searches the list and find the user that has the matching username and password
      */
-    public int findUserIndex(String userName, String password){
-    	for (int i = 0; i < userList.size(); i++) {
-    		User user = userList.get(i);
+    public User findUser(String userName, String password){
+    	for (User user: userList) {
     		if(user.isValidLogin(userName, password)) {   
-    			return i;   
+    			return user;   
     		}	
     	}
-       return -1;
+       return null;
     }
     
     /**
-     * @param email
+     * @param userName
      * @param password
-     * @return the index of a user or -1 if user not found
-     * Searches the list and find the index of the user that has the matching email and (security question) answer
+     * @return a User object
+     * Searches the list and find the user that has the matching username and password
      */
-    public int findUserIndex2(String email, String answer){
-    	for (int i = 0; i < userList.size(); i++) {
-    		User user = userList.get(i);
+    public User findUser2(String email, String answer){
+    	for (User user: userList) {
     		if(user.isAuthentic(email, answer)) {   
-    			return i;   
+    			return user;   
     		}	
     	}
-       return -1;
+       return null;
     }
+    
+//    /**
+//     * @param userName
+//     * @param password
+//     * @return the index of a user or -1 if user not found
+//     * Searches the list and find the index of the user that has the matching username and password
+//     */
+//    public int findUserIndex(String userName, String password){
+//    	for (int i = 0; i < userList.size(); i++) {
+//    		User user = userList.get(i);
+//    		if(user.isValidLogin(userName, password)) {   
+//    			return i;   
+//    		}	
+//    	}
+//       return -1;
+//    }
+//    
+//    /**
+//     * @param email
+//     * @param password
+//     * @return the index of a user or -1 if user not found
+//     * Searches the list and find the index of the user that has the matching email and (security question) answer
+//     */
+//    public int findUserIndex2(String email, String answer){
+//    	for (int i = 0; i < userList.size(); i++) {
+//    		User user = userList.get(i);
+//    		if(user.isAuthentic(email, answer)) {   
+//    			return i;   
+//    		}	
+//    	}
+//       return -1;
+//    }
     
     /**
      * @param currentUser, email
