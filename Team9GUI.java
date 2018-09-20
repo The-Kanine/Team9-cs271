@@ -32,7 +32,8 @@ public class Team9GUI implements ActionListener {
 	JPasswordField passwordSignUp, passwordLogIn, passwordEdit, passwordPassword;
 	JLabel message;
 	User user = new User(null, null, null);
-	UserList list = new UserList();
+	UserList list;
+	Boolean save;
 
 	/**
 	 * The main method that starts the Team9GUI program
@@ -40,15 +41,21 @@ public class Team9GUI implements ActionListener {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Team9GUI GUI = new Team9GUI();
+		@SuppressWarnings("unused")
+		Team9GUI GUI = new Team9GUI(false);
 	}
 
 	/**
 	 * The constructor for the Team9GUI
 	 */
-	public Team9GUI() {
+	public Team9GUI(Boolean bool) {
 		JPanel signUpPanel = signUpPanel();
 		signUpFrame = setupFrame("SIGN UP", signUpPanel, true, signUpButton);
+		save = bool;
+		list = new UserList();
+		if (save) {
+			list.readUsers();
+		}
 	}
 
 	public void quit() {
@@ -193,7 +200,7 @@ public class Team9GUI implements ActionListener {
 	}
 
 	/**
-	 * This method creates a panel that lets a user retrieve their password
+	 * This method creates a panel that lets a user retrieve their username
 	 * 
 	 * @return
 	 */
@@ -316,7 +323,7 @@ public class Team9GUI implements ActionListener {
 		if (e.getSource().equals(forgotUsernameLink)) {
 			loginFrame.dispose();
 			JPanel usernamePanel = usernamePanel();
-			usernameFrame = setupFrame("FORGOT USERNAME", usernamePanel, true, changePasswordButton);
+			usernameFrame = setupFrame("FORGOT USERNAME", usernamePanel, true, retrieveUsernameButton);
 		}
 
 		// the sign up button on the sign up page is clicked
@@ -347,6 +354,9 @@ public class Team9GUI implements ActionListener {
 			else {
 				list.addUser(userSignUp.getText(), (new String(passwordSignUp.getPassword())), emailSignUp.getText());
 				JOptionPane.showMessageDialog(signUpFrame, "Your account has been created!");
+				if (save) {
+					list.writeUsers();
+				}
 				signUpFrame.dispose();
 				JPanel loginPanel = loginPanel();
 				loginFrame = setupFrame("LOG IN", loginPanel, true, loginButton);
@@ -379,11 +389,11 @@ public class Team9GUI implements ActionListener {
 				JOptionPane.showMessageDialog(accountFrame, "The email address provided was not valid.");
 			}
 			// used email address
-			else if (list.doesEmailExist(emailSignUp.getText()) && !emailSignUp.getText().equals(user.getEmail())) {
+			else if (list.doesEmailExist(emailEdit.getText()) && !(emailEdit.getText().equals(user.getEmail()))) {
 				JOptionPane.showMessageDialog(accountFrame, "This email address already exists in our system.");
 			}
 			// used username
-			else if (list.doesUserNameExist(userSignUp.getText()) && !userSignUp.getText().equals(user.getUsername())) {
+			else if (list.doesUserNameExist(usernameEdit.getText()) && !(usernameEdit.getText().equals(user.getUsername()))) {
 				JOptionPane.showMessageDialog(accountFrame, "This username already exists in our system.");
 			} else
 
@@ -396,6 +406,9 @@ public class Team9GUI implements ActionListener {
 				user.setEmail(emailEdit.getText());
 				user.setAnswer(answerEdit.getText());
 				JOptionPane.showMessageDialog(accountFrame, "Your account has been updated!");
+				if (save) {
+					list.writeUsers();
+				}
 				accountFrame.dispose();
 				JPanel accountPanel = accountPanel();
 				accountFrame = setupFrame("ACCOUNT INFORMATION", accountPanel, true, editButton);
@@ -420,6 +433,9 @@ public class Team9GUI implements ActionListener {
 				user = list.findUser2(emailPassword.getText(), answerPassword.getText());
 				user.setPasswd(new String(passwordPassword.getPassword()));
 				JOptionPane.showMessageDialog(passwordFrame, "Your password has been reset");
+				if (save) {
+					list.writeUsers();
+				}
 				passwordFrame.dispose();
 				JPanel loginPanel = loginPanel();
 				loginFrame = setupFrame("LOG IN", loginPanel, true, loginButton);

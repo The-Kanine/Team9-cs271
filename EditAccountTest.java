@@ -17,7 +17,7 @@ public class EditAccountTest {
 
 	@Before
 	public void setUp() throws Exception {
-		team9GUI = new Team9GUI();
+		team9GUI = new Team9GUI(false);
 		
 		//sign-up
 		// Expected message: "Your account has been created!"

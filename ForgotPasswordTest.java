@@ -13,7 +13,7 @@ public class ForgotPasswordTest {
 
 	@Before
 	public void setUp() throws Exception {
-		team9GUI = new Team9GUI();
+		team9GUI = new Team9GUI(false);
 		
 		//sign-up
 		// Expected message: "Your account has been created!"
@@ -64,6 +64,7 @@ public class ForgotPasswordTest {
 	public void forgotPNonExistingEmail() {
 		team9GUI.emailPassword.setText("non-existing email");
 		team9GUI.answerPassword.setText("Coconut");
+		team9GUI.passwordPassword.setText("Bronco2022");
 		team9GUI.changePasswordButton.doClick();
 	}
 	
@@ -74,6 +75,7 @@ public class ForgotPasswordTest {
 	public void forgotPIncorrectAnswer() {
 		team9GUI.emailPassword.setText("name@gmail.com");
 		team9GUI.answerPassword.setText("Coconut");
+		team9GUI.passwordPassword.setText("Bronco2022");
 		team9GUI.changePasswordButton.doClick();
 	}
 	

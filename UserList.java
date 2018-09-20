@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 /**
@@ -147,4 +152,38 @@ public class UserList {
 				return true;
 		return false;
 	}
+	
+  /**
+     * write userList to a file so it can be retrieved
+     */
+    public void writeUsers() {
+    	try {
+    		FileOutputStream users=new FileOutputStream("user9.txt");
+    		ObjectOutputStream write = new ObjectOutputStream(users);
+    		write.writeObject(userList);
+			write.close();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+    }
+    /**
+     * retrieves userList from file
+     */
+    @SuppressWarnings("unchecked")
+	public void readUsers() {
+    	try {
+    		File temp = new File("user9.txt");
+    		if(temp.exists()) {
+    			FileInputStream  users= new FileInputStream("user9.txt");
+    			ObjectInputStream read= new ObjectInputStream(users);
+    			userList= (ArrayList<User>) read.readObject();
+    			read.close();
+    		}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 }

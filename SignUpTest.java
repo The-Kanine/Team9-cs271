@@ -15,7 +15,7 @@ public class SignUpTest {
 
 	@Before
 	public void setUp() throws Exception {
-		team9GUI = new Team9GUI();
+		team9GUI = new Team9GUI(false);
 	}
 
 	@After

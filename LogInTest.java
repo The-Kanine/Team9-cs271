@@ -15,7 +15,7 @@ public class LogInTest {
 
 	@Before
 	public void setUp() {
-		team9GUI = new Team9GUI();
+		team9GUI = new Team9GUI(false);
 		
 		//sign-up
 		// Expected message: "Your account has been created!"

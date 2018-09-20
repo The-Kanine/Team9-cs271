@@ -1,7 +1,7 @@
 Please read Tuan&Van README.txt
 Please edit this README
 
-# Project X: Project Name?
+# Project 4: Team 9
 
 * Author: Team 9
 * Class: CS-HU 271 Section 1
@@ -9,38 +9,22 @@ Please edit this README
 
 ## Overview
 
-Concisely explain what the program does...
+This program acts as a simple account management system.
 
 ## Compiling and Using
 
-...
+use javac to compile Team9GUI.java , User.java and UserList.java
 
-## Discussion
-
-Discuss the issues and successes you encountered during programming
-(development). Here are some questions to get you started. You don't
-have to answer all of them in order - they are a guideline to get you
-thinking.
-  * What problems did you have? What went well?
-  * What process did you go through to create the program?
-  * What did you have to research and learn on your own?
-  * What kinds of errors did you get? How did you fix them?
-  * What parts of the project did you find challenging?
-  * Is there anything that finally "clicked" for you in the process 
-  of working on this project?
-  * Is there anything that you would change about the project?
-  * Can you apply what you learned in this project to future projects?
+The main method is in Team9GUI. use java to run it.
 
 ## Testing
 
 We have 7 test classes. They use JUnit 4. They are:
 - UserTest.java for User.java
 - UserListTest.java for UserList.java
-- SignUpTest.java, LogInTest.java, EditAccount.java, ForgotUsername.java,
+- SignUpTest.java, LogInTest.java, EditAccountTest.java, ForgotUsernameTest.java,
 and ForgotPassword for Team9GUI.java
 Details about them are in our backlog.
 All of our products pass all of our test cases.
 
-## Sources used
 
-...

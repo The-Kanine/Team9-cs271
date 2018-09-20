@@ -1,4 +1,3 @@
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,7 +12,7 @@ public class ForgotUsernameTest {
 
 	@Before
 	public void setUp() throws Exception {
-		team9GUI = new Team9GUI();
+		team9GUI = new Team9GUI(false);
 		
 		//sign-up
 		// Expected message: "Your account has been created!"
@@ -23,7 +22,7 @@ public class ForgotUsernameTest {
 		team9GUI.passwordSignUp.setText("Bronco2020");
 		team9GUI.signUpButton.doClick();
 		
-		team9GUI.forgotUsernameButton.doClick();
+		team9GUI.forgotUsernameLink.doClick();
 	}
 	
 	@Test
@@ -32,7 +31,7 @@ public class ForgotUsernameTest {
 	// Switches to ForgotUsernamePanel
 	// Expected message: "Please fill in all fields."
 	public void forgotUEmptyEmail() {
-		team9GUI.confirmEmailButton.doClick();
+		team9GUI.retrieveUsernameButton.doClick();
 	}
 
 	@Test
@@ -40,8 +39,8 @@ public class ForgotUsernameTest {
 	//forgot username non-existing email
 	//expect message "The email address provided does not exist in our system."
 	public void forgotUNonExistingEmail() {
-		team9GUI.forgotUEmail.setText("non-existing email");
-		team9GUI.confirmEmailButton.doClick();
+		team9GUI.giveEmail.setText("non-existing email");
+		team9GUI.retrieveUsernameButton.doClick();
 	}
 	
 	@Test
@@ -49,8 +48,8 @@ public class ForgotUsernameTest {
 	//forgot username existing email
 	//expect message "Your username is [corresponding username]"
 	public void forgotUExistingEmail() {
-		team9GUI.forgotUEmail.setText("name@gmail.com");
-		team9GUI.confirmEmailButton.doClick();
+		team9GUI.giveEmail.setText("name@gmail.com");
+		team9GUI.retrieveUsernameButton.doClick();
 	}
 	
 	@Test
@@ -58,6 +57,6 @@ public class ForgotUsernameTest {
 	//forgot username cancel
 	// No expect message. Switches back to login screen
 	public void forgotUCancel() {
-		team9GUI.forgotUCancelButton.doClick();
+		team9GUI.exitUsernameLink.doClick();
 	}
 }
