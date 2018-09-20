@@ -1,6 +1,3 @@
-Please read Tuan&Van README.txt
-Please edit this README
-
 # Project 4: Team 9
 
 * Author: Team 9
@@ -24,7 +21,7 @@ We have 7 test classes. They use JUnit 4. They are:
 - UserListTest.java for UserList.java
 - SignUpTest.java, LogInTest.java, EditAccountTest.java, ForgotUsernameTest.java,
 and ForgotPassword for Team9GUI.java
-Details about them are in our backlog.
-All of our products pass all of our test cases.
+
+Details about them are in our backlog. All of our products pass all of our test cases.
 
 
