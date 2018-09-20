@@ -13,7 +13,7 @@ This program acts as a simple account management system.
 
 ## Compiling and Using
 
-use javac to compile Team9GUI.java , User.java and UserList.java
+Use javac to compile Team9GUI.java , User.java, and UserList.java.
 
 The main method is in Team9GUI. use java to run it.
 
